@@ -1,6 +1,37 @@
+'use client'
+import { useEffect, useState } from 'react';
+
 function Turtlepage(){
+    const [message, setMessage] = useState("")
     const itemdetails : {[key:string]:number} = {"D" : 62, "I":2 , "N":1 , "R":3}
-    let status : boolean = false
+    const status : boolean = false
+
+    useEffect(() => {
+        const socket = new WebSocket('ws://localhost:3001')
+    
+        socket.onopen = () => {
+            console.log("Connected to Web socket")
+        };
+
+        socket.onmessage = (event) => {
+            console.log('Message from server: ', event.data);
+            setMessage(event.data)
+        };
+
+        socket.onclose = () => {
+            console.log('Disconnected from WebSocket server');
+        };
+      
+        socket.onerror = (error) => {
+            console.error('WebSocket Error: ', error);
+        };
+        // Clean up WebSocket connection when the component unmounts
+        return () => {
+            console.log("closing websocket")
+            socket.close();
+        };
+      }, []);
+
     return(
         <div className=" grid grid-cols-2 gap-2 pt-4">
             <div className=" border-2 rounded-xl border-t-orange-500 border-r-orange-500 p-2 flex flex-col max-h-fit items-center">
@@ -15,6 +46,9 @@ function Turtlepage(){
                         <div className="select-none">{value}</div>
                     </div>
                 ))}
+            </div>
+            <div>
+                {message}
             </div>
         </div>
     )
