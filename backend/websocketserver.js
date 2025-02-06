@@ -1,10 +1,14 @@
 const Websocket = require("ws")
 const wss = new Websocket.Server({port:3001});
+const data = {
+  itemdetails : {"Turtle1" :{"diamond" : 62, "iron":2 , "netherite":1 , "redstone":3},"Turtle2" :{"diamond" : 10 , "iron":2, "netherite":0 , "redstone":5}},
+  turtleName : ["Turtle1","Turtle2","Turtle3"]
+}
 
 wss.on('connection', (ws) => {
     console.log('someone connected!');
 
-    ws.send('Welcome to server');
+    ws.send(JSON.stringify(data))
 
     ws.on('message', (message) => {
         console.log(`Received message: ${message}`);
