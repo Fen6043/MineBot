@@ -25,7 +25,7 @@ function Toolbar(){
             };
           
             socket.onerror = (error) => {
-                console.error('WebSocket Error: ', error);
+                console.log('WebSocket Error: ', error);
             };
             // Clean up WebSocket connection when the component unmounts
             return () => {

@@ -1,6 +1,9 @@
 const Websocket = require("ws")
 const wss = new Websocket.Server({port:3001});
 const data = {
+  statusdetails : {"Turtle1" : true,"Turtle2" : false,"Turtle3": false},
+  locationdetails : {"Turtle1" : "1000 12 300","Turtle2" : "200 10 350"},
+  fueldetails : {"Turtle1" : 100,"Turtle2" : 1200},
   itemdetails : {"Turtle1" :{"diamond" : 62, "iron":2 , "netherite":1 , "redstone":3},"Turtle2" :{"diamond" : 10 , "iron":2, "netherite":0 , "redstone":5}},
   turtleName : ["Turtle1","Turtle2","Turtle3"]
 }
